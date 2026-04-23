@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+/* Header */
+header {
+    padding: 24px 80px;
+    position: sticky;
+    top: 0;
+    background-color: #0a0a0a;
+    border-bottom: 1px solid #1f1f1f;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+nav a {
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffffff;
+}
+
+/* Sectiuni */
+section {
+    padding: 60px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Hero */
+#despre h1 {
+    font-size: 52px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+#despre {
+    text-align: left;
+}
+
+#despre p {
+    font-size: 16px;
+    color: #888;
+    max-width: 500px;
+    margin: 0;
+}
+
+.highlight {
+    color: #e94560;
+}
+
+/* Buton */
+.btn {
+    display: inline-block;
+    border: 1px solid #e94560;
+    color: #e94560;
+    padding: 12px 32px;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-top: 32px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e94560;
+    color: white;
+}
+
+/* Skills */
+.skills {
+    margin-top: 40px;
+    display: flex;
+    justify-content:  flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    border: 1px solid #333;
+    color: #888;
+    padding: 4px 14px;
+    border-radius: 3px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* Carduri */
+#proiecte h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 60px;
+}
+
+.carduri {
+    display: flex;
+    justify-content: flex-start;
+    gap: 24px;
+}
+
+.card {
+    border: 1px solid #1f1f1f;
+    padding: 32px;
+    border-radius: 6px;
+    width: 300px;
+    text-align: left;
+    transition: border-color 0.3s ease;
+}
+
+.card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+}
+
+.card:hover {
+    border-color: #e94560;
+}
+
+/* Contact */
+#contact h2 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 24px;
+}
+
+#contact a {
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+#contact a:hover {
+    color: #e94560;
+}
+
+.contact-sub {
+    color: #888;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 32px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-links a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s ease;
+}
+
+.contact-links a:hover {
+    color: #e94560;
+}
+
+.contact-links i {
+    width: 20px;
+    color: #888;
+}
+
+/* About list */
+
+.about-list {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.about-list p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.about-list ul {
+    list-style: disc;
+    padding-left: 20px;
+    color: #888;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.about-list li {
+    color: #ccc;
+}
+
+
+hr {
+    border: none;
+    border-top: 1px solid #3b3939;
+    max-width: 1100px;
+    margin: 0 auto;
+}
