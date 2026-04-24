@@ -49,10 +49,8 @@ nav {
 }
 
 .logo {
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff;
-    letter-spacing: 2px;
+    height: 40px;
+    width: auto;
 }
 
 nav ul {
