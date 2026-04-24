@@ -5,7 +5,19 @@
 }
 
 @media (max-width: 768px) {
-    /* stiluri pentru mobil */
+    nav {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    section {
+        padding: 60px 20px;
+    }
+
+    #despre h1 {
+        font-size: 36px;
+    }
 }
 
 body {
