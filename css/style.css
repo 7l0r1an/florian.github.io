@@ -18,8 +18,19 @@
     #despre h1 {
         font-size: 36px;
     }
+
     .logo {
         display: none;
+    }
+
+    .carduri {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 400px;
     }
 }
 
@@ -38,6 +49,7 @@ header {
     top: 0;
     background-color: #0a0a0a;
     border-bottom: 1px solid #1f1f1f;
+    z-index: 100;
 }
 
 nav {
@@ -49,8 +61,8 @@ nav {
 }
 
 .logo {
-    height: 70px !important;
-    width: auto !important;
+    height: 70px;
+    width: auto;
 }
 
 nav ul {
@@ -85,6 +97,20 @@ section {
     color: #ffffff;
     line-height: 1.2;
     margin-bottom: 20px;
+    /* cursorul clipitor dupa typing effect */
+    min-height: 64px;
+}
+
+/* cursor clipitor cat timp se scrie */
+#typing-title::after {
+    content: '|';
+    color: #e94560;
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
 }
 
 #despre {
@@ -125,7 +151,7 @@ section {
 .skills {
     margin-top: 40px;
     display: flex;
-    justify-content:  flex-start;
+    justify-content: flex-start;
     gap: 12px;
     flex-wrap: wrap;
 }
@@ -151,6 +177,7 @@ section {
     display: flex;
     justify-content: flex-start;
     gap: 24px;
+    flex-wrap: wrap;
 }
 
 .card {
@@ -160,23 +187,33 @@ section {
     width: 300px;
     text-align: left;
     transition: border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .card h3 {
     font-size: 18px;
     font-weight: 600;
     color: #ffffff;
-    margin-bottom: 12px;
 }
 
 .card p {
     font-size: 14px;
     color: #888;
     line-height: 1.6;
+    flex: 1;
 }
 
 .card:hover {
     border-color: #e94560;
+}
+
+/* tag-urile din card pe acelasi rand */
+.card-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 /* Contact */
@@ -187,24 +224,70 @@ section {
     margin-bottom: 24px;
 }
 
-#contact a {
-    color: #888;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-}
-
-#contact a:hover {
-    color: #e94560;
-}
-
 .contact-sub {
     color: #888;
     font-size: 14px;
-    margin-top: 8px;
     margin-bottom: 32px;
 }
 
+/* Form */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 12px 16px;
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
+    color: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    resize: none;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    outline: none;
+    border-color: #555;
+}
+
+#contact-form input::placeholder,
+#contact-form textarea::placeholder {
+    color: #444;
+}
+
+#contact-form button {
+    padding: 12px;
+    background: #e94560;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+#contact-form button:hover {
+    opacity: 0.85;
+}
+
+#form-status {
+    font-size: 13px;
+    color: #888;
+    min-height: 20px;
+}
+
+/* Contact links */
 .contact-links {
     display: flex;
     flex-direction: column;
@@ -231,7 +314,6 @@ section {
 }
 
 /* About list */
-
 .about-list {
     margin-top: 40px;
     text-align: left;
@@ -246,8 +328,6 @@ section {
 .about-list ul {
     list-style: disc;
     padding-left: 20px;
-    color: #888;
-    font-size: 15px;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -255,12 +335,12 @@ section {
 
 .about-list li {
     color: #ccc;
+    font-size: 15px;
 }
-
 
 hr {
     border: none;
-    border-top: 1px solid #3b3939;
+    border-top: 1px solid #1f1f1f;
     max-width: 1100px;
     margin: 0 auto;
 }

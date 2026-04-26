@@ -19,9 +19,11 @@
         </ul>
     </nav>
 </header>
+
 <!-- Despre -->
 <section id="despre">
-    <h1>Hi, my name is <span class="highlight">Florian</span></h1>
+    <!-- id="typing-title" — JS scrie textul caracter cu caracter -->
+    <h1 id="typing-title"></h1>
     <p>A passionate developer focused on Python and web development</p>
     <a href="CV_Florian_Gadiuta_EN_v2.pdf" class="btn" target="_blank">Download CV</a>
 
@@ -44,24 +46,46 @@
     </div>
 </section>
 <hr>
+
 <!-- Proiecte -->
 <section id="proiecte">
     <h2>projects</h2>
     <div class="carduri">
         <div class="card">
             <h3>Betting Tracker</h3>
-            <p>Desktop App in Python to track sports bets.</p>
+            <p>Desktop app in Python to track sports bets, with stats and history.</p>
+            <span class="tag">Python</span>
+            <span class="tag">Tkinter</span>
+        </div>
+        <div class="card">
+            <h3>Snake Game</h3>
+            <p>Classic Snake game built in Python with smooth controls and score tracking.</p>
+            <span class="tag">Python</span>
+        </div>
+        <div class="card">
+            <h3>Conway's Game of Life</h3>
+            <p>Cellular automaton simulation with layered architecture and live grid rendering.</p>
             <span class="tag">Python</span>
         </div>
     </div>
 </section>
 <hr>
+
 <!-- Contact -->
 <section id="contact">
     <h2>contact</h2>
     <p class="contact-sub">feel free to contact me</p>
+
+    <form id="contact-form">
+        <input type="text" id="from_name" placeholder="Your name" required />
+        <input type="email" id="reply_to" placeholder="Your email" required />
+        <textarea id="message" placeholder="Your message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+        <p id="form-status"></p>
+    </form>
+
     <div class="contact-links">
-        <a href="mailto:email@gmail.com">
+        <a href="mailto:gadiutaf@gmail.com">
             <i class="fas fa-envelope"></i> gadiutaf@gmail.com
         </a>
         <a href="https://github.com/7l0r1an" target="_blank">
@@ -72,6 +96,9 @@
         </a>
     </div>
 </section>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
