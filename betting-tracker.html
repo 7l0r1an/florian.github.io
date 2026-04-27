@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betting Tracker | Florian</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        header {
+            padding: 24px 80px;
+            position: sticky;
+            top: 0;
+            background-color: #0a0a0a;
+            border-bottom: 1px solid #1f1f1f;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .nav-back {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-back:hover { color: #fff; }
+        nav ul { display: flex; list-style: none; gap: 40px; }
+        nav a { color: #888; text-decoration: none; font-size: 14px; letter-spacing: 1px; transition: color 0.3s ease; }
+        nav a:hover { color: #fff; }
+
+        .hero { padding: 80px 80px 60px; max-width: 1100px; margin: 0 auto; }
+
+        .project-label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #e94560;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 20px; }
+        .hero > p { font-size: 16px; color: #888; max-width: 650px; margin-bottom: 32px; }
+        .tags { display: flex; gap: 12px; flex-wrap: wrap; }
+        .tag { border: 1px solid #333; color: #888; padding: 4px 14px; border-radius: 3px; font-size: 12px; letter-spacing: 1px; }
+        .tag.accent { border-color: #e94560; color: #e94560; }
+
+        hr { border: none; border-top: 1px solid #1f1f1f; max-width: 1100px; margin: 0 auto; }
+
+        section { padding: 60px 80px; max-width: 1100px; margin: 0 auto; }
+        section h2 { font-size: 28px; font-weight: 600; color: #fff; margin-bottom: 12px; }
+        .section-sub { color: #888; font-size: 15px; margin-bottom: 40px; }
+
+        /* Screenshots */
+        .screenshot-main {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid #1f1f1f;
+            margin-bottom: 8px;
+            display: block;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .screenshot-main:hover { border-color: #e94560; }
+
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid #1f1f1f;
+            cursor: pointer;
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .screenshot-item img:hover { border-color: #e94560; transform: scale(1.02); }
+
+        .screenshot-caption {
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.93);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active { display: flex; }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 24px;
+            right: 32px;
+            color: #888;
+            font-size: 28px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .lightbox-close:hover { color: #fff; }
+
+        /* Features */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+
+        .feature {
+            border: 1px solid #1f1f1f;
+            border-radius: 6px;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: border-color 0.3s ease;
+        }
+
+        .feature:hover { border-color: #333; }
+        .feature-icon { color: #e94560; font-size: 18px; margin-top: 2px; width: 20px; flex-shrink: 0; }
+        .feature h3 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+        .feature p { font-size: 13px; color: #666; line-height: 1.6; }
+
+        /* Architecture */
+        .arch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+
+        .arch-card {
+            border: 1px solid #1f1f1f;
+            border-radius: 6px;
+            padding: 24px;
+            transition: border-color 0.3s ease;
+        }
+
+        .arch-card:hover { border-color: #e94560; }
+        .arch-card .layer { font-size: 11px; letter-spacing: 2px; color: #e94560; text-transform: uppercase; margin-bottom: 8px; }
+        .arch-card h3 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .arch-card p { font-size: 13px; color: #666; line-height: 1.6; }
+
+        /* Code */
+        .code-block {
+            background: #111;
+            border: 1px solid #1f1f1f;
+            border-radius: 6px;
+            padding: 24px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            overflow-x: auto;
+            margin-bottom: 24px;
+        }
+
+        .code-block .comment { color: #555; }
+        .code-block .keyword { color: #e94560; }
+        .code-block .string { color: #a8c97f; }
+        .code-block .func { color: #d2a679; }
+
+        /* Stats */
+        .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+
+        .stat-card { border: 1px solid #1f1f1f; border-radius: 6px; padding: 24px; text-align: center; }
+        .stat-card .number { font-size: 32px; font-weight: 700; color: #fff; display: block; }
+        .stat-card .label { font-size: 12px; letter-spacing: 1px; color: #555; text-transform: uppercase; margin-top: 4px; display: block; }
+
+        .btn {
+            display: inline-block;
+            border: 1px solid #e94560;
+            color: #e94560;
+            padding: 12px 32px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover { background-color: #e94560; color: white; }
+
+        @media (max-width: 768px) {
+            header { padding: 24px 20px; }
+            .hero { padding: 60px 20px 40px; }
+            .hero h1 { font-size: 36px; }
+            section { padding: 40px 20px; }
+            nav ul { display: none; }
+            .screenshot-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html" class="nav-back">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+        <ul>
+            <li><a href="index.html#despre">About</a></li>
+            <li><a href="index.html#proiecte">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close"><i class="fas fa-times"></i></span>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<div class="hero">
+    <p class="project-label">Project Case Study</p>
+    <h1>Betting <span style="color:#e94560">Tracker</span></h1>
+    <p>A full-featured desktop application built in Python to track sports bets, analyze performance by bet type, manage your bankroll, predict match outcomes, and visualize your profit evolution — all from a custom dark-themed GUI.</p>
+    <div class="tags">
+        <span class="tag accent">Python</span>
+        <span class="tag">Tkinter</span>
+        <span class="tag">Matplotlib</span>
+        <span class="tag">REST API</span>
+        <span class="tag">JSON</span>
+        <span class="tag">Layered Architecture</span>
+    </div>
+</div>
+
+<hr>
+
+<!-- Screenshots -->
+<section>
+    <h2>Screenshots</h2>
+    <p class="section-sub">Click any image to enlarge.</p>
+
+    <img src="bet2.png" alt="Dashboard" class="screenshot-main" onclick="openLightbox(this.src)">
+    <p class="screenshot-caption" style="text-align:center; font-size:11px; color:#555; letter-spacing:1px; margin-bottom:24px;">DASHBOARD — live overview: bets, accumulators, profit, win rate, ROI</p>
+
+    <div class="screenshot-grid">
+        <div class="screenshot-item">
+            <img src="bet3.png" alt="Add Bet" onclick="openLightbox(this.src)">
+            <p class="screenshot-caption">Add Bet & Accumulators</p>
+        </div>
+        <div class="screenshot-item">
+            <img src="bet1.png" alt="Bet History" onclick="openLightbox(this.src)">
+            <p class="screenshot-caption">Bet History</p>
+        </div>
+        <div class="screenshot-item">
+            <img src="bet7.png" alt="Type Analysis" onclick="openLightbox(this.src)">
+            <p class="screenshot-caption">Analysis by Bet Type</p>
+        </div>
+        <div class="screenshot-item">
+            <img src="bet4.png" alt="Match Predictor" onclick="openLightbox(this.src)">
+            <p class="screenshot-caption">Match Predictor + Live Matches</p>
+        </div>
+        <div class="screenshot-item">
+            <img src="bet5.png" alt="Value Bet" onclick="openLightbox(this.src)">
+            <p class="screenshot-caption">Value Bet Calculator</p>
+        </div>
+        <div class="screenshot-item">
+            <img src="bet6.png" alt="Bank" onclick="openLightbox(this.src)">
+            <p class="screenshot-caption">Bank Management</p>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<!-- Features -->
+<section>
+    <h2>Features</h2>
+    <p class="section-sub">Everything you need to track and analyze sports betting performance.</p>
+    <div class="features-grid">
+        <div class="feature">
+            <i class="fas fa-tachometer-alt feature-icon"></i>
+            <div>
+                <h3>Dashboard</h3>
+                <p>Live overview: total bets, accumulators, profit, win rate, and ROI. Recent bets listed with results at a glance.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-plus-circle feature-icon"></i>
+            <div>
+                <h3>Single Bets & Accumulators</h3>
+                <p>Log bets with match, odds, stake, and type (1X2, Peste/Sub, BTTS). Build multi-match accumulators with automatic total odds and potential profit preview.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-history feature-icon"></i>
+            <div>
+                <h3>Bet History</h3>
+                <p>Full history with Win/Lose/All and Single/Accumulator filters. Update match results individually inside accumulators.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-chart-bar feature-icon"></i>
+            <div>
+                <h3>Bet Type Analysis</h3>
+                <p>Performance breakdown per type — 1X2, Peste/Sub, BTTS — with win rate bar, profit, ROI, and "most profitable" highlight.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-chart-line feature-icon"></i>
+            <div>
+                <h3>Profit Chart</h3>
+                <p>Matplotlib chart showing bankroll evolution over time with green/red fill zones for profit and loss periods.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-wifi feature-icon"></i>
+            <div>
+                <h3>Live Match Data</h3>
+                <p>Upcoming matches from 8 major leagues via football-data.org API. Add matches directly to your bet slip from the UI.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-brain feature-icon"></i>
+            <div>
+                <h3>Match Predictor</h3>
+                <p>Predicts win probabilities using last 5 matches form, head-to-head history, standings position, and 1.15x home advantage multiplier.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-calculator feature-icon"></i>
+            <div>
+                <h3>Value Bet Calculator</h3>
+                <p>Input your estimated probability and bookmaker odds. Get value %, expected value in RON, and a clear "worth it / skip" verdict.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-piggy-bank feature-icon"></i>
+            <div>
+                <h3>Bank Management</h3>
+                <p>Set initial budget, track current balance, and see total profit/loss. Add funds at any time.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <i class="fas fa-calendar-week feature-icon"></i>
+            <div>
+                <h3>Weekly Summary</h3>
+                <p>Auto-generated weekly report with best/worst bet, total staked, profit, and win rate for the previous week.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<!-- Architecture -->
+<section>
+    <h2>Architecture</h2>
+    <p class="section-sub">Clean layered architecture — each layer has one responsibility and communicates only with the layer below.</p>
+    <div class="arch-grid">
+        <div class="arch-card">
+            <div class="layer">Layer 1 — UI</div>
+            <h3>GUI + Console</h3>
+            <p>Tkinter dark-themed GUI with sidebar navigation. Also includes a full console interface. Zero business logic in this layer.</p>
+        </div>
+        <div class="arch-card">
+            <div class="layer">Layer 2 — Business</div>
+            <h3>Logic & Analysis</h3>
+            <p>10 modules: tracker, accumulator tracker, value calculator, match predictor, stats analyzer, type analyzer, bank manager, chart, weekly summary.</p>
+        </div>
+        <div class="arch-card">
+            <div class="layer">Layer 3 — Repository</div>
+            <h3>Data Access</h3>
+            <p>File repos for JSON persistence (bets, accumulators, bank), API repo for football-data.org. All I/O is isolated here.</p>
+        </div>
+        <div class="arch-card">
+            <div class="layer">Layer 4 — Domain</div>
+            <h3>Domain Objects</h3>
+            <p><code style="color:#888">Bet</code> and <code style="color:#888">Accumulator</code> classes with computed <code style="color:#888">profit</code> properties — never stored, always calculated.</p>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<!-- Code highlights -->
+<section>
+    <h2>Code Highlights</h2>
+    <p class="section-sub">A few interesting implementation details.</p>
+
+    <p style="color:#888; font-size:14px; margin-bottom:12px;">Match predictor — scoring algorithm using form, standings & head-to-head:</p>
+    <div class="code-block">
+        <span class="keyword">def</span> <span class="func">calculate_score</span>(form, is_home):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;score = <span class="string">0</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> match <span class="keyword">in</span> form:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 3 pts for win, 1 for draw, 0 for loss</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match_score = <span class="string">3</span> <span class="keyword">if</span> match[<span class="string">"result"</span>] == <span class="string">"W"</span> <span class="keyword">else</span> <span class="string">1</span> <span class="keyword">if</span> match[<span class="string">"result"</span>] == <span class="string">"D"</span> <span class="keyword">else</span> <span class="string">0</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match_score += match[<span class="string">"goals_scored"</span>] * <span class="string">0.5</span>   <span class="comment"># goal bonus</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;match_score -= match[<span class="string">"goals_conceded"</span>] * <span class="string">0.3</span> <span class="comment"># conceded penalty</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score += match_score<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> is_home:<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score *= <span class="string">1.15</span>  <span class="comment"># home advantage multiplier</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> max(score, <span class="string">0.1</span>)
+    </div>
+
+    <p style="color:#888; font-size:14px; margin-bottom:12px;">Value Bet Calculator — expected value formula:</p>
+    <div class="code-block">
+        <span class="keyword">def</span> <span class="func">expected_value</span>(stake, your_probability, bookmaker_odds):<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;win_chance    = your_probability / <span class="string">100</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;lose_chance   = <span class="string">1</span> - win_chance<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;profit_if_win = stake * bookmaker_odds - stake<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># EV = (win_chance × profit) - (lose_chance × stake)</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;ev = (win_chance * profit_if_win) - (lose_chance * stake)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> round(ev, <span class="string">2</span>)
+    </div>
+</section>
+
+<hr>
+
+<!-- Stats -->
+<section>
+    <h2>By the Numbers</h2>
+    <div class="stats-row">
+        <div class="stat-card">
+            <span class="number">8</span>
+            <span class="label">Live leagues</span>
+        </div>
+        <div class="stat-card">
+            <span class="number">10</span>
+            <span class="label">Business modules</span>
+        </div>
+        <div class="stat-card">
+            <span class="number">4</span>
+            <span class="label">Architecture layers</span>
+        </div>
+        <div class="stat-card">
+            <span class="number">3</span>
+            <span class="label">Bet types</span>
+        </div>
+        <div class="stat-card">
+            <span class="number" style="color:#e94560">v1.0</span>
+            <span class="label">Current version</span>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section>
+    <a href="index.html#proiecte" class="btn">
+        <i class="fas fa-arrow-left" style="margin-right:8px"></i>Back to Projects
+    </a>
+</section>
+
+<script>
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+</script>
+
+</body>
+</html>
